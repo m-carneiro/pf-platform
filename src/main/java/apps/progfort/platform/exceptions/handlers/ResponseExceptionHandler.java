@@ -2,6 +2,7 @@ package apps.progfort.platform.exceptions.handlers;
 
 import apps.progfort.platform.exceptions.ApiError;
 import apps.progfort.platform.exceptions.ResourceNotFoundException;
+import apps.progfort.platform.exceptions.SQLIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,18 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 ),
                 new HttpHeaders(),
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(SQLIntegrityViolationException.class)
+    protected ResponseEntity<Object> handleSQLIntegrityViolationException(SQLIntegrityViolationException ex) {
+        return new ResponseEntity<>(
+                new ApiError(
+                        HttpStatus.BAD_REQUEST.value(),
+                        ex.getMessage()
+                ),
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST
         );
     }
 }

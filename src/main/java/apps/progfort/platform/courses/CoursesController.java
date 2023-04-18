@@ -1,7 +1,5 @@
 package apps.progfort.platform.courses;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,22 +11,25 @@ import java.util.List;
 @RequestMapping("/api/v1/courses")
 public class CoursesController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CoursesController.class);
     private final CoursesService coursesService;
 
     public CoursesController(CoursesService coursesService) {
         this.coursesService = coursesService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Courses> getCourse(@PathVariable String id) {
+        return ResponseEntity.ok(coursesService.getCourse(id));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Courses>> getAllCourses() {
-        LOGGER.
         return ResponseEntity.ok(coursesService.getAllCourses());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Courses> addCourse(@RequestBody CoursesDAO coursesDAO) {
-        Courses course = coursesService.addCourse(coursesDAO);
+    public ResponseEntity<Courses> addCourse(@RequestBody CoursesDTO coursesDTO) {
+        Courses course = coursesService.addCourse(coursesDTO);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -36,5 +37,31 @@ public class CoursesController {
                 .toUri();
 
         return ResponseEntity.created(location).body(course);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Courses> updateCourse(
+            @PathVariable String id,
+            @RequestBody CoursesDTO coursesDTO
+    ) {
+        Courses course = coursesService.updateCourse(id, coursesDTO);
+
+        return ResponseEntity.ok().body(course);
+    }
+
+    @PutMapping("/activate/{id}")
+    public ResponseEntity<Courses> activateCourse(@PathVariable String id) {
+        return ResponseEntity.ok(coursesService.activateCourse(id));
+    }
+
+    @PutMapping("/deactivate/{id}")
+    public ResponseEntity<Courses> deactivateCourse(@PathVariable String id) {
+        return ResponseEntity.ok(coursesService.deactivateCourse(id));
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<Void> deleteCourse(@PathVariable String id) {
+        coursesService.deleteCourse(id);
+        return ResponseEntity.noContent().build();
     }
 }
