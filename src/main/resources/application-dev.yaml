@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: ${DATASOURCE.URL}
+    username: ${DATASOURCE.USERNAME}
+    password: ${DATASOURCE.PASSWORD}
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: ${DATASOURCE.PATH}
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+
+server:
+  port: ${SERVER.PORT}
