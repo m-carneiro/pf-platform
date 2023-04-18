@@ -13,27 +13,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return new ResponseEntity<>(
-                new ApiError(
-                        HttpStatus.NOT_FOUND.value(),
-                        ex.getMessage()
-                ),
-                new HttpHeaders(),
-                HttpStatus.NOT_FOUND
-        );
-    }
+  @ExceptionHandler(ResourceNotFoundException.class)
+  protected ResponseEntity<Object>
+  handleResourceNotFoundException(ResourceNotFoundException ex) {
+    return new ResponseEntity<>(
+        new ApiError(HttpStatus.NOT_FOUND.value(), ex.getMessage()),
+        new HttpHeaders(), HttpStatus.NOT_FOUND);
+  }
 
-    @ExceptionHandler(SQLIntegrityViolationException.class)
-    protected ResponseEntity<Object> handleSQLIntegrityViolationException(SQLIntegrityViolationException ex) {
-        return new ResponseEntity<>(
-                new ApiError(
-                        HttpStatus.BAD_REQUEST.value(),
-                        ex.getMessage()
-                ),
-                new HttpHeaders(),
-                HttpStatus.BAD_REQUEST
-        );
-    }
+  @ExceptionHandler(SQLIntegrityViolationException.class)
+  protected ResponseEntity<Object>
+  handleSQLIntegrityViolationException(SQLIntegrityViolationException ex) {
+    return new ResponseEntity<>(
+        new ApiError(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
+        new HttpHeaders(), HttpStatus.BAD_REQUEST);
+  }
 }
