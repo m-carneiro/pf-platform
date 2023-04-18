@@ -8,16 +8,16 @@ import java.util.UUID;
 @Component
 public class CoursesFactory {
 
-    public Courses createCourse(CoursesDAO coursesDAO) {
+    public Courses createCourse(CoursesDTO coursesDTO) {
         Courses course = new Courses();
 
         course.setId(UUID.randomUUID().toString());
-        course.setName(coursesDAO.getName());
-        course.setDescription(coursesDAO.getDescription());
-        course.setTags(coursesDAO.getTags());
-        course.setLevel(coursesDAO.getLevel());
+        course.setName(coursesDTO.getName());
+        course.setDescription(coursesDTO.getDescription());
+        course.setTags(coursesDTO.getTags());
+        course.setLevel(coursesDTO.getLevel());
         course.setClasses(Collections.emptyList());
-        course.setPrice(coursesDAO.getPrice());
+        course.setPrice(coursesDTO.getPrice());
         course.setIsActive(true);
         course.setStudents(Collections.emptyList());
 

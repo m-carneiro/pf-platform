@@ -4,17 +4,17 @@ import apps.progfort.platform.enums.Dificulties;
 
 import java.util.List;
 
-public class CoursesDAO {
+public class CoursesDTO {
     private String name;
     private String description;
     private List<String> tags;
     private Dificulties level;
     private Double price;
 
-    public CoursesDAO() {
+    public CoursesDTO() {
     }
 
-    public CoursesDAO(String name,
+    public CoursesDTO(String name,
                       String description,
                       List<String> tags,
                       Dificulties level,
