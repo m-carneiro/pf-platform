@@ -1,8 +1,10 @@
 package apps.progfort.platform.courses;
 
-import apps.progfort.platform.courseClasses.Classes;
+import apps.progfort.platform.classes.Classes;
 import apps.progfort.platform.enums.Dificulties;
+import apps.progfort.platform.registry.LastViewedCourseRegistry;
 import apps.progfort.platform.students.Students;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,6 +18,8 @@ public class Courses implements Serializable {
     private String id;
     private String name;
     private String description;
+
+    private String category;
 
     @ElementCollection
     private List<String> tags;
@@ -36,35 +40,49 @@ public class Courses implements Serializable {
             fetch = FetchType.LAZY,
             mappedBy = "courses"
     )
+    @JsonIgnoreProperties("courses")
     private List<Students> students;
+
+    @OneToOne
+    private CourseMetadata metadata;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "lastViewedCourse"
+    )
+    private LastViewedCourseRegistry lastViewedCourseRegistry;
+
 
     public Courses() {
     }
 
-    public Courses(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Courses(String id,
-                   String name,
-                   String description,
-                   List<String> tags,
-                   Dificulties level,
-                   List<Classes> classes,
-                   Double price,
-                   Boolean isActive,
-                   List<Students> students
+    public Courses(
+            String id,
+            String name,
+            String description,
+            String category,
+            List<String> tags,
+            Dificulties level,
+            List<Classes> classes,
+            Double price,
+            Boolean isActive,
+            List<Students> students,
+            CourseMetadata metadata,
+            LastViewedCourseRegistry lastViewedCourseRegistry
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
         this.tags = tags;
         this.level = level;
         this.classes = classes;
         this.price = price;
         this.isActive = isActive;
         this.students = students;
+        this.metadata = metadata;
+        this.lastViewedCourseRegistry = lastViewedCourseRegistry;
     }
 
     public String getId() {
@@ -95,7 +113,7 @@ public class Courses implements Serializable {
         return price;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
@@ -137,5 +155,29 @@ public class Courses implements Serializable {
 
     public void setStudents(List<Students> students) {
         this.students = students;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public CourseMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(CourseMetadata metadata) {
+        this.metadata = metadata;
+    }
+
+    public LastViewedCourseRegistry getLastViewedCourseRegistry() {
+        return lastViewedCourseRegistry;
+    }
+
+    public void setLastViewedCourseRegistry(LastViewedCourseRegistry lastViewedCourseRegistry) {
+        this.lastViewedCourseRegistry = lastViewedCourseRegistry;
     }
 }

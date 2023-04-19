@@ -18,7 +18,8 @@ public class CoursesFactory {
         course.setLevel(coursesDTO.getLevel());
         course.setClasses(Collections.emptyList());
         course.setPrice(coursesDTO.getPrice());
-        course.setIsActive(true);
+        course.setIsActive(false);
+        course.setCategory(coursesDTO.getCategory());
         course.setStudents(Collections.emptyList());
 
         return course;
