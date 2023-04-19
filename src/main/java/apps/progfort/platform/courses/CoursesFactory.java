@@ -2,6 +2,7 @@ package apps.progfort.platform.courses;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class CoursesFactory {
         course.setIsActive(false);
         course.setCategory(coursesDTO.getCategory());
         course.setStudents(Collections.emptyList());
+        course.setUpdatedAt(LocalDateTime.now().toString());
 
         return course;
     }

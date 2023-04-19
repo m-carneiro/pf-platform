@@ -1,10 +1,7 @@
 package apps.progfort.platform.courseClasses;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/classes")
@@ -15,11 +12,11 @@ public class ClassesController {
         this.classesService = classesService;
     }
 
-    @PostMapping("/enroll/{studentId}/{courseId}")
+    @PostMapping("/enroll/{courseId}")
     public ResponseEntity<CoursesWithStudents> enrollStudent(
-           @PathVariable String studentId,
+           @RequestBody StudentRequest student,
            @PathVariable String courseId
     ) {
-        return ResponseEntity.ok(classesService.enrollStudent(studentId, courseId));
+        return ResponseEntity.ok(classesService.enrollStudent(student.id(), courseId));
     }
 }
