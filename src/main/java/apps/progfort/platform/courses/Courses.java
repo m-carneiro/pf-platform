@@ -1,7 +1,7 @@
 package apps.progfort.platform.courses;
 
 import apps.progfort.platform.classes.Classes;
-import apps.progfort.platform.enums.Dificulties;
+import apps.progfort.platform.enums.Difficulties;
 import apps.progfort.platform.registry.LastViewedCourseRegistry;
 import apps.progfort.platform.students.Students;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,7 +24,7 @@ public class Courses implements Serializable {
     @ElementCollection
     private List<String> tags;
 
-    private Dificulties level;
+    private Difficulties level;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -34,6 +34,8 @@ public class Courses implements Serializable {
     private List<Classes> classes;
     private Double price;
     private Boolean isActive;
+
+    private String updatedAt;
 
     @ManyToMany(
             cascade = CascadeType.ALL,
@@ -51,6 +53,7 @@ public class Courses implements Serializable {
             fetch = FetchType.LAZY,
             mappedBy = "lastViewedCourse"
     )
+    @JsonIgnoreProperties("lastViewedCourse")
     private LastViewedCourseRegistry lastViewedCourseRegistry;
 
 
@@ -63,10 +66,11 @@ public class Courses implements Serializable {
             String description,
             String category,
             List<String> tags,
-            Dificulties level,
+            Difficulties level,
             List<Classes> classes,
             Double price,
             Boolean isActive,
+            String updatedAt,
             List<Students> students,
             CourseMetadata metadata,
             LastViewedCourseRegistry lastViewedCourseRegistry
@@ -80,6 +84,7 @@ public class Courses implements Serializable {
         this.classes = classes;
         this.price = price;
         this.isActive = isActive;
+        this.updatedAt = updatedAt;
         this.students = students;
         this.metadata = metadata;
         this.lastViewedCourseRegistry = lastViewedCourseRegistry;
@@ -101,7 +106,7 @@ public class Courses implements Serializable {
         return tags;
     }
 
-    public Dificulties getLevel() {
+    public Difficulties getLevel() {
         return level;
     }
 
@@ -137,7 +142,7 @@ public class Courses implements Serializable {
         this.tags = tags;
     }
 
-    public void setLevel(Dificulties level) {
+    public void setLevel(Difficulties level) {
         this.level = level;
     }
 
@@ -179,5 +184,13 @@ public class Courses implements Serializable {
 
     public void setLastViewedCourseRegistry(LastViewedCourseRegistry lastViewedCourseRegistry) {
         this.lastViewedCourseRegistry = lastViewedCourseRegistry;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

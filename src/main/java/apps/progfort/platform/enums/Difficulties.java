@@ -1,6 +1,6 @@
 package apps.progfort.platform.enums;
 
-public enum Dificulties {
+public enum Difficulties {
     EASY, MEDIUM, HARD;
 
     public Integer code() {

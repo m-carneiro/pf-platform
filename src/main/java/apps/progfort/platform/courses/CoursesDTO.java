@@ -1,6 +1,6 @@
 package apps.progfort.platform.courses;
 
-import apps.progfort.platform.enums.Dificulties;
+import apps.progfort.platform.enums.Difficulties;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class CoursesDTO {
     private String name;
     private String description;
     private List<String> tags;
-    private Dificulties level;
+    private Difficulties level;
 
     private String category;
     private Double price;
@@ -20,7 +20,7 @@ public class CoursesDTO {
             String name,
             String description,
             List<String> tags,
-            Dificulties level,
+            Difficulties level,
             String category,
             Double price
     ) {
@@ -56,11 +56,11 @@ public class CoursesDTO {
         this.tags = tags;
     }
 
-    public Dificulties getLevel() {
+    public Difficulties getLevel() {
         return level;
     }
 
-    public void setLevel(Dificulties level) {
+    public void setLevel(Difficulties level) {
         this.level = level;
     }
 

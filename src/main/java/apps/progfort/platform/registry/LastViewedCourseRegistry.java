@@ -2,6 +2,7 @@ package apps.progfort.platform.registry;
 
 import apps.progfort.platform.courses.Courses;
 import apps.progfort.platform.students.Students;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class LastViewedCourseRegistry {
     private Students student;
 
     @OneToOne
+    @JsonIgnoreProperties("lastViewedCourseRegistry")
     private Courses lastViewedCourse;
 
     private LocalDateTime lastViewedDate;
