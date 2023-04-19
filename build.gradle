@@ -13,6 +13,12 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core
+    implementation 'software.amazon.awssdk:sdk-core:2.17.69'
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/auth
+    implementation 'software.amazon.awssdk:auth:2.17.69'
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/s3
+    testImplementation 'software.amazon.awssdk:s3:2.17.69'
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
     implementation "org.springframework.security:spring-security-core:6.0.2"
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
