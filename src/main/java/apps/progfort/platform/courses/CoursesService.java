@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static apps.progfort.platform.courses.CoursesMessages.ACTIVATED_SUCCESSFULLY;
+import static apps.progfort.platform.courses.CoursesMessages.DEACTIVATED_SUCCESSFULLY;
 import static apps.progfort.platform.exceptions.ExceptionMessages.COURSE_NOT_DELETED;
 import static apps.progfort.platform.exceptions.ExceptionMessages.COURSE_NOT_FOUND;
 
@@ -39,29 +41,38 @@ public class CoursesService {
     public void deleteCourse(String id) {
         try {
             coursesRepository.deleteById(id);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw new SQLIntegrityViolationException(COURSE_NOT_DELETED);
         }
     }
 
-    public Courses activateCourse(String id) {
+    public CourseActivated activateCourse(String id) {
         Courses courses = coursesRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(COURSE_NOT_FOUND)
         );
-
         courses.setIsActive(true);
+        Courses savedCourse = coursesRepository.save(courses);
 
-        return coursesRepository.save(courses);
+        return new CourseActivated(
+                savedCourse.getId(),
+                savedCourse.getIsActive(),
+                ACTIVATED_SUCCESSFULLY
+        );
     }
 
-    public Courses deactivateCourse(String id) {
+    public CourseDeactivated deactivateCourse(String id) {
         Courses courses = coursesRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(COURSE_NOT_FOUND)
         );
 
         courses.setIsActive(false);
+        Courses savedCourse = coursesRepository.save(courses);
 
-        return coursesRepository.save(courses);
+        return new CourseDeactivated(
+                savedCourse.getId(),
+                savedCourse.getIsActive(),
+                DEACTIVATED_SUCCESSFULLY
+        );
     }
 
     public Courses updateCourse(String id, CoursesDTO coursesDTO) {
@@ -86,5 +97,9 @@ public class CoursesService {
         courses.setStudents(newCourse.getStudents());
 
         return coursesRepository.save(courses);
+    }
+
+    public void save(Courses course) {
+        coursesRepository.save(course);
     }
 }

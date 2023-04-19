@@ -9,21 +9,26 @@ public class CoursesDTO {
     private String description;
     private List<String> tags;
     private Dificulties level;
+
+    private String category;
     private Double price;
 
     public CoursesDTO() {
     }
 
-    public CoursesDTO(String name,
-                      String description,
-                      List<String> tags,
-                      Dificulties level,
-                      Double price
+    public CoursesDTO(
+            String name,
+            String description,
+            List<String> tags,
+            Dificulties level,
+            String category,
+            Double price
     ) {
         this.name = name;
         this.description = description;
         this.tags = tags;
         this.level = level;
+        this.category = category;
         this.price = price;
     }
 
@@ -65,5 +70,13 @@ public class CoursesDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

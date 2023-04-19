@@ -50,12 +50,12 @@ public class CoursesController {
     }
 
     @PutMapping("/activate/{id}")
-    public ResponseEntity<Courses> activateCourse(@PathVariable String id) {
+    public ResponseEntity<CourseActivated> activateCourse(@PathVariable String id) {
         return ResponseEntity.ok(coursesService.activateCourse(id));
     }
 
     @PutMapping("/deactivate/{id}")
-    public ResponseEntity<Courses> deactivateCourse(@PathVariable String id) {
+    public ResponseEntity<CourseDeactivated> deactivateCourse(@PathVariable String id) {
         return ResponseEntity.ok(coursesService.deactivateCourse(id));
     }
 
