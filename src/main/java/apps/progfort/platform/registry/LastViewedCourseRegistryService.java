@@ -4,21 +4,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LastViewedCourseRegistryService {
-    private final LastViewedCourseRegistryRepository lastViewedCourseRegistryRepository;
-    private final LastViewedCourseRegistryFactory lastViewedCourseRegistryFactory;
+  private final LastViewedCourseRegistryRepository
+      lastViewedCourseRegistryRepository;
+  private final LastViewedCourseRegistryFactory lastViewedCourseRegistryFactory;
 
-    public LastViewedCourseRegistryService(
-            LastViewedCourseRegistryRepository lastViewedCourseRegistryRepository,
-            LastViewedCourseRegistryFactory lastViewedCourseRegistryFactory
-    ) {
-        this.lastViewedCourseRegistryRepository = lastViewedCourseRegistryRepository;
-        this.lastViewedCourseRegistryFactory = lastViewedCourseRegistryFactory;
-    }
+  public LastViewedCourseRegistryService(
+      LastViewedCourseRegistryRepository lastViewedCourseRegistryRepository,
+      LastViewedCourseRegistryFactory lastViewedCourseRegistryFactory) {
+    this.lastViewedCourseRegistryRepository =
+        lastViewedCourseRegistryRepository;
+    this.lastViewedCourseRegistryFactory = lastViewedCourseRegistryFactory;
+  }
 
-    public LastViewedCourseRegistry save(LastViewedCourseRegistryDTO lastViewedCourseRegistryDTO) {
-        return lastViewedCourseRegistryRepository.save(
-                lastViewedCourseRegistryFactory.create(lastViewedCourseRegistryDTO)
-        );
-    }
-
+  public LastViewedCourseRegistry
+  save(LastViewedCourseRegistryDTO lastViewedCourseRegistryDTO) {
+    return lastViewedCourseRegistryRepository.save(
+        lastViewedCourseRegistryFactory.create(lastViewedCourseRegistryDTO));
+  }
 }

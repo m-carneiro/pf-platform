@@ -9,25 +9,16 @@ import jakarta.persistence.Table;
 @Table(name = "course_metadata")
 public class CourseMetadata {
 
-    @Id
-    private String id;
-    private String thumbnail;
+  @Id private String id;
+  private String thumbnail;
 
-    @OneToOne(mappedBy = "metadata")
-    private Courses courses;
+  @OneToOne(mappedBy = "metadata") private Courses courses;
 
-    public CourseMetadata() {
-    }
+  public CourseMetadata() {}
 
-    public CourseMetadata(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
+  public CourseMetadata(String thumbnail) { this.thumbnail = thumbnail; }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
+  public String getThumbnail() { return thumbnail; }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
+  public void setThumbnail(String thumbnail) { this.thumbnail = thumbnail; }
 }

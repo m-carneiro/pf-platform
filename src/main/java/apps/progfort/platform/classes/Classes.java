@@ -9,16 +9,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "classes")
 public class Classes {
-    @Id
-    private String id;
-    @ManyToOne()
-    private Courses course;
+  @Id private String id;
+  @ManyToOne() private Courses course;
 
-    public Classes() {
-    }
+  public Classes() {}
 
-    public Classes(String id, Courses course) {
-        this.id = id;
-        this.course = course;
-    }
+  public Classes(String id, Courses course) {
+    this.id = id;
+    this.course = course;
+  }
 }

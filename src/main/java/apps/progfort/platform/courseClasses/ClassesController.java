@@ -9,17 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/classes")
 public class ClassesController {
-    private final ClassesService classesService;
+  private final ClassesService classesService;
 
-    public ClassesController(ClassesService classesService) {
-        this.classesService = classesService;
-    }
+  public ClassesController(ClassesService classesService) {
+    this.classesService = classesService;
+  }
 
-    @PostMapping("/enroll/{studentId}/{courseId}")
-    public ResponseEntity<CoursesWithStudents> enrollStudent(
-           @PathVariable String studentId,
-           @PathVariable String courseId
-    ) {
-        return ResponseEntity.ok(classesService.enrollStudent(studentId, courseId));
-    }
+  @PostMapping("/enroll/{studentId}/{courseId}")
+  public ResponseEntity<CoursesWithStudents>
+  enrollStudent(@PathVariable String studentId, @PathVariable String courseId) {
+    return ResponseEntity.ok(classesService.enrollStudent(studentId, courseId));
+  }
 }
