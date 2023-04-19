@@ -8,18 +8,19 @@ import software.amazon.awssdk.regions.Region;
 @Configuration
 public class S3Configuration {
 
-    private String accessKey;
-    private String secretKey;
-    private String bucketName;
-    private String region;
+  private String accessKey;
+  private String secretKey;
+  private String bucketName;
+  private String region;
 
-    public S3Client s3Client() {
-        AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKey, secretKey);
+  public S3Client s3Client() {
+    AwsBasicCredentials awsCredentials =
+        AwsBasicCredentials.create(accessKey, secretKey);
 
-        S3Client client = new S3Client.builder()
-                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
-                .region(Region.of(region))
-                .build();
-
-    }
+    S3Client client = new S3Client.builder()
+                          .credentialsProvider(StaticCredentialsProvider.create(
+                              AwsBasicCredentials.create(accessKey, secretKey)))
+                          .region(Region.of(region))
+                          .build();
+  }
 }
