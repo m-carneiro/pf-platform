@@ -8,6 +8,9 @@ spring:
     console:
       enabled: true
       path: ${DATASOURCE.PATH}
+      settings:
+        web-allow-others: false
+
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
