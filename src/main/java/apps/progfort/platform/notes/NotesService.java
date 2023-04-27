@@ -3,7 +3,10 @@ package apps.progfort.platform.notes;
 import apps.progfort.platform.exceptions.SQLIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static apps.progfort.platform.exceptions.ExceptionMessages.CANNOT_DELETE_NOTE_WITH_ID;
 
@@ -30,5 +33,15 @@ public class NotesService {
         } catch (Exception e) {
             throw new SQLIntegrityViolationException(CANNOT_DELETE_NOTE_WITH_ID + id);
         }
+    }
+
+    public List<Note> getAllNotesFromAStudentBy(String studentId) {
+        List<Note> notes = notesRepository.findAll();
+
+        return notes.stream()
+                .filter(note -> note.getStudents()
+                        .stream()
+                        .anyMatch(student -> student.getId().equals(studentId)))
+                .collect(Collectors.toList());
     }
 }
