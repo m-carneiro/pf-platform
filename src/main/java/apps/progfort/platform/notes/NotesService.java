@@ -25,12 +25,10 @@ public class NotesService {
     }
 
     public void deleteById(String id) {
-
         try {
             notesRepository.deleteById(id);
         } catch (Exception e) {
             throw new SQLIntegrityViolationException(CANNOT_DELETE_NOTE_WITH_ID + id);
-
         }
     }
 }

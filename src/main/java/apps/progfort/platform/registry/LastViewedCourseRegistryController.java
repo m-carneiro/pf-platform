@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/last-viewed")
+@RequestMapping("/last-viewed")
 public class LastViewedCourseRegistryController {
     private final StudentsService studentsService;
 
