@@ -1,6 +1,7 @@
 package apps.progfort.platform.students;
 
 import apps.progfort.platform.courses.Courses;
+import apps.progfort.platform.notes.Note;
 import apps.progfort.platform.registry.LastViewedCourseRegistry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -41,6 +42,22 @@ public class Students implements Serializable {
     )
     private LastViewedCourseRegistry lastViewedCourseRegistry;
 
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "students_notes",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "note_id",
+                    referencedColumnName = "id"
+            )
+    )
+    @JsonIgnoreProperties("students")
+    private List<Note> notes;
     public Students(
             String id,
             String name,

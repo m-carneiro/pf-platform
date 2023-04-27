@@ -1,11 +1,12 @@
 package apps.progfort.platform.notes;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import apps.progfort.platform.students.Students;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "notes")
@@ -15,14 +16,22 @@ public class Note implements Serializable {
     private String id;
     private String title;
     private String content;
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "notes"
+    )
+    @JsonIgnoreProperties("notes")
+    private List<Students> students;
 
     public Note() {
     }
 
-    public Note(String id, String title, String content) {
+    public Note(String id, String title, String content, List<Students> students) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.students = students;
     }
 
     public String getId() {
@@ -47,5 +56,13 @@ public class Note implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<Students> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Students> students) {
+        this.students = students;
     }
 }
