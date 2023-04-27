@@ -56,7 +56,6 @@ public class Courses implements Serializable {
     @JsonIgnoreProperties("lastViewedCourse")
     private LastViewedCourseRegistry lastViewedCourseRegistry;
 
-
     public Courses() {
     }
 
