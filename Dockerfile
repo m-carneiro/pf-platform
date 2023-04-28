@@ -28,6 +28,6 @@ COPY .env /app
 COPY --from=builder /app/init.sh /app
 COPY --from=builder /app/build/libs/pf-platform-1.jar /app/
 
-EXPOSE 3000
+EXPOSE 8080
 
 ENTRYPOINT ["sh", "init.sh"]
