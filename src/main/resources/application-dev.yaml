@@ -19,3 +19,5 @@ spring:
 
 server:
   port: ${SERVER.PORT}
+  servlet:
+    context-path: /api/v1
