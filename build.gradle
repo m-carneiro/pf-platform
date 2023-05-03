@@ -13,6 +13,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.soabase.record-builder:record-builder-core:36'
+    implementation 'io.projectreactor.netty:reactor-netty:1.1.6'
+    implementation 'org.springframework:spring-webflux:6.0.8'
     implementation 'software.amazon.awssdk:sdk-core:2.17.69'
     implementation 'software.amazon.awssdk:auth:2.17.69'
     implementation "me.paulschwarz:spring-dotenv:3.0.0"
