@@ -21,3 +21,12 @@ server:
   port: ${SERVER.PORT}
   servlet:
     context-path: /api/v1
+
+vimeo:
+  url: ${VIMEO.URL}
+  videos-uri: "/me/videos"
+  auth:
+    url: ${VIMEO.AUTH.URL}
+    client-id: ${VIMEO.CLIENT.ID}
+    client-secret: ${VIMEO.CLIENT.SECRET}
+    accept-media-type: ${VIMEO.AUTH.ACCEPT}
