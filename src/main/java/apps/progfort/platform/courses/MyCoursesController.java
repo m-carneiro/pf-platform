@@ -1,7 +1,7 @@
 package apps.progfort.platform.courses;
 
 import apps.progfort.platform.courseClasses.ClassesService;
-import apps.progfort.platform.courseClasses.StudentRequest;
+import apps.progfort.platform.courseClasses.EnrollRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ public class MyCoursesController {
 
     @GetMapping
     public List<Courses> getAllMyCourses(
-            @RequestBody StudentRequest student
+            @RequestBody EnrollRequest student
     ) {
-        return classesService.getAllMyCourses(student.id());
+        return classesService.getAllMyCourses(student.studentId());
     }
 }

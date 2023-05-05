@@ -15,6 +15,7 @@ public class Note implements Serializable {
     @Id
     private String id;
     private String title;
+    @Column(length = 2048)
     private String content;
     @ManyToMany(
             cascade = CascadeType.ALL,

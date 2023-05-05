@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "org.springframework.boot:spring-boot-starter-security"
+   // compileOnly "org.springframework.boot:spring-boot-starter-security"
     compileOnly 'org.projectlombok:lombok:1.18.26'
 
     implementation 'io.soabase.record-builder:record-builder-core:36'

@@ -23,7 +23,12 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) {
         try {
-            LOGGER.info("Request URI: {}, Method: {}, IP: {}", request.getRequestURI(), request.getMethod(), request.getRemoteAddr());
+            LOGGER.info("Request Status: {} URI: {}, Method: {}, IP: {}"
+                    , response.getStatus(),
+                    request.getRequestURI(),
+                    request.getMethod(),
+                    request.getRemoteAddr()
+            );
             filterChain.doFilter(request, response);
         } catch (ServletException | IOException e) {
             LOGGER.error("Error while logging request", e);

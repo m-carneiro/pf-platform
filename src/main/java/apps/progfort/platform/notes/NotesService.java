@@ -1,10 +1,9 @@
 package apps.progfort.platform.notes;
 
 import apps.progfort.platform.exceptions.SQLIntegrityViolationException;
+import apps.progfort.platform.students.StudentsService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,17 +13,28 @@ import static apps.progfort.platform.exceptions.ExceptionMessages.CANNOT_DELETE_
 public class NotesService {
 
     private final NotesRepository notesRepository;
+    private final NotesFactory notesFactory;
+    private final StudentsService studentsService;
 
-    public NotesService(NotesRepository notesRepository) {
+    public NotesService(
+            NotesRepository notesRepository,
+            NotesFactory notesFactory,
+            StudentsService studentsService
+    )
+    {
         this.notesRepository = notesRepository;
+        this.notesFactory = notesFactory;
+        this.studentsService = studentsService;
     }
 
     public List<Note> findAll() {
         return notesRepository.findAll();
     }
 
-    public Note save(Note notes) {
-        return notesRepository.save(notes);
+    public Note save(NoteDTO noteDTO) {
+        var student = studentsService.getStudentById(noteDTO.studentId());
+
+        return notesRepository.save(notesFactory.createNote(noteDTO, student));
     }
 
     public void deleteById(String id) {

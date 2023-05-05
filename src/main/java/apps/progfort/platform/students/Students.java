@@ -63,13 +63,15 @@ public class Students implements Serializable {
             String name,
             String email,
             List<Courses> courses,
-            LastViewedCourseRegistry lastViewedCourseRegistry
+            LastViewedCourseRegistry lastViewedCourseRegistry,
+            List<Note> notes
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.courses = courses;
         this.lastViewedCourseRegistry = lastViewedCourseRegistry;
+        this.notes = notes;
     }
 
     public Students() {
