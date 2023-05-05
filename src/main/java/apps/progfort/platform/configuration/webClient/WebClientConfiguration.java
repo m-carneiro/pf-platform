@@ -13,6 +13,7 @@ import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class WebClientConfiguration {
@@ -23,18 +24,16 @@ public class WebClientConfiguration {
     private static final int TIMEOUT = 1000;
 
     @Bean
-    public WebClient configurationWithTimeout() {
-
-        TcpClient tcpClient = TcpClient.create()
+    public static WebClient create() {
+        HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
-                .doOnConnected(connection -> connection
-                        .addHandlerLast(new ReadTimeoutHandler(TIMEOUT))
-                        .addHandlerLast(new WriteTimeoutHandler(TIMEOUT)));;
-
+                .doOnConnected(connection -> {
+                    connection.addHandlerLast(new ReadTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(TIMEOUT, TimeUnit.MILLISECONDS));
+                });
 
         return WebClient.builder()
-                .baseUrl(baseUrl)
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(MAX_MEMORY_SIZE))
                 .build();
     }
