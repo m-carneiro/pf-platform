@@ -1,7 +1,3 @@
 package apps.progfort.platform.courseClasses;
 
-public record EnrollRequest(
-         String studentId,
-         String courseId
-) {
-}
+public record EnrollRequest(String studentId, String courseId) {}

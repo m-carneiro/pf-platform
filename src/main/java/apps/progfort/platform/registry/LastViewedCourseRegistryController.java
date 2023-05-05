@@ -11,20 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/last-viewed")
 public class LastViewedCourseRegistryController {
-    private final StudentsService studentsService;
+  private final StudentsService studentsService;
 
-    public LastViewedCourseRegistryController(StudentsService studentsService) {
-        this.studentsService = studentsService;
-    }
+  public LastViewedCourseRegistryController(StudentsService studentsService) {
+    this.studentsService = studentsService;
+  }
 
-    @GetMapping
-    public ResponseEntity<LastViewedCourseRegistry> save(
-            @RequestBody EnrollRequest student
-            ) {
-        return ResponseEntity.ok(
-                studentsService
-                        .getStudentById(student.studentId())
-                        .getLastViewedCourseRegistry()
-        );
-    }
+  @GetMapping
+  public ResponseEntity<LastViewedCourseRegistry>
+  save(@RequestBody EnrollRequest student) {
+    return ResponseEntity.ok(studentsService.getStudentById(student.studentId())
+                                 .getLastViewedCourseRegistry());
+  }
 }
