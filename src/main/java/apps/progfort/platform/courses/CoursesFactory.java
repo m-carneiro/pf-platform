@@ -13,14 +13,14 @@ public class CoursesFactory {
         Courses course = new Courses();
 
         course.setId(UUID.randomUUID().toString());
-        course.setName(coursesDTO.getName());
-        course.setDescription(coursesDTO.getDescription());
-        course.setTags(coursesDTO.getTags());
-        course.setLevel(coursesDTO.getLevel());
+        course.setName(coursesDTO.name());
+        course.setDescription(coursesDTO.description());
+        course.setTags(coursesDTO.tags());
+        course.setLevel(coursesDTO.level());
         course.setClasses(Collections.emptyList());
-        course.setPrice(coursesDTO.getPrice());
+        course.setPrice(coursesDTO.price());
         course.setIsActive(false);
-        course.setCategory(coursesDTO.getCategory());
+        course.setCategory(coursesDTO.category());
         course.setStudents(Collections.emptyList());
         course.setUpdatedAt(LocalDateTime.now().toString());
 

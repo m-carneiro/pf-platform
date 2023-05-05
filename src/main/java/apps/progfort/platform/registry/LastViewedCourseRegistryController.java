@@ -1,6 +1,6 @@
 package apps.progfort.platform.registry;
 
-import apps.progfort.platform.courseClasses.StudentRequest;
+import apps.progfort.platform.courseClasses.EnrollRequest;
 import apps.progfort.platform.students.StudentsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ public class LastViewedCourseRegistryController {
 
     @GetMapping
     public ResponseEntity<LastViewedCourseRegistry> save(
-            @RequestBody StudentRequest student
+            @RequestBody EnrollRequest student
             ) {
         return ResponseEntity.ok(
                 studentsService
-                        .getStudentById(student.id())
+                        .getStudentById(student.studentId())
                         .getLastViewedCourseRegistry()
         );
     }

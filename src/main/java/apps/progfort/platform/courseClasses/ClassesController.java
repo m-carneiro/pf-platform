@@ -12,11 +12,15 @@ public class ClassesController {
         this.classesService = classesService;
     }
 
-    @PostMapping("/enroll/{courseId}")
+    @PostMapping("/enroll/")
     public ResponseEntity<CoursesWithStudents> enrollStudent(
-           @RequestBody StudentRequest student,
-           @PathVariable String courseId
+           @RequestBody EnrollRequest enroll
     ) {
-        return ResponseEntity.ok(classesService.enrollStudent(student.id(), courseId));
+        return ResponseEntity.ok(
+                classesService.enrollStudent(
+                        enroll.studentId(),
+                        enroll.courseId()
+                )
+        );
     }
 }
